@@ -6,11 +6,13 @@ public class AI {
 
         // --------------------------------------------------------------------------
         // AI Game Mode - called by Main.java
+        // Handles the full game loop when playing against the computer.
+        // Human chooses symbol, AI takes the opposite.
         // --------------------------------------------------------------------------
 
         public static void playVsAI() {
 
-            // Get player name and symbol
+            // Get the player name and symbol:
             String playerName = UI.promptName(1);
             char human = UI.promptSymbol(playerName);
             char ai = (human == 'X') ? 'O' : 'X';
@@ -19,22 +21,33 @@ public class AI {
             Board board = new Board();
             board.showBoard();
 
-            // X always goes first
+            // X always goes first:
             boolean isPlayerTurn = (human == 'X');
 
             while (true) {
 
+                // ------------------------------------------------------------------
+                // HUMAN TURN
+                // ------------------------------------------------------------------
                 if (isPlayerTurn) {
 
                     int[] move = UI.promptMove(playerName);
-                    board.placeSymbol(human, move[0], move[1]);
 
+                    // Prevent illegal moves (cell already taken):
+                    if (!board.placeSymbol(human, move[0], move[1])) {
+                        board.showBoard();
+                        UI.showError("That cell is already taken.");
+                        continue; // Do NOT switch turns — ask again
+                    }
+
+                    // Check if the human player wins:
                     if (board.checkWin(human)) {
                         board.showBoard();
                         UI.showWinner(playerName);
                         break;
                     }
 
+                    // Check for a draw:
                     if (board.checkState(human) == 'D') {
                         board.showBoard();
                         UI.showDraw();
@@ -42,11 +55,19 @@ public class AI {
                     }
 
                     board.showBoard();
+                }
 
-                } else {
+                // ------------------------------------------------------------------
+                // AI TURN
+                // ------------------------------------------------------------------
+                    else {
 
                     System.out.println("Computer is thinking...");
+
+                    // AI chooses best move using the minimax algorithm:
                     int[] aiMove = AI.getBestMove(board);
+
+                    // AI always plays legally because the minimax algorithm only selects empty cells:
                     board.placeSymbol(ai, aiMove[0], aiMove[1]);
                     board.showBoard();
 
@@ -58,6 +79,7 @@ public class AI {
                         break;
                     }
 
+                    // Check for a draw:
                     if (board.checkState(ai) == 'D') {
                         board.showBoard();
                         UI.showDraw();
@@ -65,6 +87,7 @@ public class AI {
                     }
                 }
 
+                // Switch turns:
                 isPlayerTurn = !isPlayerTurn;
             }
 
@@ -72,7 +95,7 @@ public class AI {
         }
 
         // --------------------------------------------------------------------------
-        // Get Best Move - returns the AI's optimal move
+        // Get Best Move - returns the AI's optimal move using the minimax algorithm
         // --------------------------------------------------------------------------
 
         public static int[] getBestMove(Board board) {
@@ -83,15 +106,22 @@ public class AI {
             int bestRow = -1;
             int bestCol = -1;
 
+            // Try every empty cell on the board:
             for (int row = 0; row < 3; row++) {
                 for (int col = 0; col < 3; col++) {
 
                     if (boardArray[row][col] == ' ') {
 
+                        // Try the move:
                         boardArray[row][col] = 'O';
+
+                        // Evaluate using the minimax algorithm:
                         int score = minimax(boardArray, false);
+
+                        // Undo the move:
                         boardArray[row][col] = ' ';
 
+                        // Keep the best scoring move:
                         if (score > bestScore) {
                             bestScore = score;
                             bestRow = row;
@@ -106,17 +136,21 @@ public class AI {
 
         // --------------------------------------------------------------------------
         // Minimax Algorithm (Recursive)
+        // Evaluates all possible future game states and returns the best score.
+        // AI tries to maximize score; human player tries to minimize it.
         // --------------------------------------------------------------------------
 
         private static int minimax(char[][] board, boolean aiTurn) {
 
+            //Base Cases:
             if (winner(board, 'O')) 
-                    return 10;
+                    return 10;    // AI wins
             if (winner(board, 'X')) 
-                    return -10;
+                    return -10;  // Human player wins
             if (full(board)) 
-                    return 0;
+                    return 0;   // Draw
 
+            // AI turn (maximize score):
             if (aiTurn) {
                 int best = Integer.MIN_VALUE;
 
@@ -131,6 +165,7 @@ public class AI {
                 }
                 return best;
 
+            // Human turn (minimize score):
             } else {
                 int best = Integer.MAX_VALUE;
 
@@ -151,6 +186,7 @@ public class AI {
         // Helper Methods
         // --------------------------------------------------------------------------
 
+        // Returns true if the board is full:
         private static boolean full(char[][] board) {
             for (char[] row : board)
                 for (char cell : row)
@@ -159,6 +195,7 @@ public class AI {
             return true;
         }
 
+        // Checks if a given player has won:
         private static boolean winner(char[][] b, char p) {
             for (int i = 0; i < 3; i++) {
                 if (b[i][0] == p && b[i][1] == p && b[i][2] == p) 
