@@ -110,9 +110,12 @@ public class AI {
 
         private static int minimax(char[][] board, boolean aiTurn) {
 
-            if (winner(board, 'O')) return 10;
-            if (winner(board, 'X')) return -10;
-            if (full(board)) return 0;
+            if (winner(board, 'O')) 
+                    return 10;
+            if (winner(board, 'X')) 
+                    return -10;
+            if (full(board)) 
+                    return 0;
 
             if (aiTurn) {
                 int best = Integer.MIN_VALUE;
@@ -158,11 +161,15 @@ public class AI {
 
         private static boolean winner(char[][] b, char p) {
             for (int i = 0; i < 3; i++) {
-                if (b[i][0] == p && b[i][1] == p && b[i][2] == p) return true;
-                if (b[0][i] == p && b[1][i] == p && b[2][i] == p) return true;
+                if (b[i][0] == p && b[i][1] == p && b[i][2] == p) 
+                        return true;
+                if (b[0][i] == p && b[1][i] == p && b[2][i] == p) 
+                        return true;
             }
-            if (b[0][0] == p && b[1][1] == p && b[2][2] == p) return true;
-            if (b[0][2] == p && b[1][1] == p && b[2][0] == p) return true;
+            if (b[0][0] == p && b[1][1] == p && b[2][2] == p) 
+                    return true;
+            if (b[0][2] == p && b[1][1] == p && b[2][0] == p) 
+                    return true;
             return false;
         }
     }
