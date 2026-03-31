@@ -16,7 +16,7 @@ public class AI {
     // Scanner for reading user input:
     static Scanner input = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void playVsAI() {
 
         System.out.println("Welcome to the Tic Tac Toe game! You are X, your AI opponent is O.");
 

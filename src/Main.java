@@ -1,7 +1,6 @@
 
 // Main Menu
-public static void main(String[] args) {
-
+void main() {
     boolean playAgain = true;
 
     while (playAgain) {
@@ -9,9 +8,9 @@ public static void main(String[] args) {
         int mode = UI.promptGameMode();
 
         if (mode == 1) {
-            playTwoPlayer();
+            TwoPlayer.playTwoPlayer();
         } else {
-            playVsAI();
+            AI.playVsAI();
         }
 
         playAgain = UI.promptPlayAgain();
