@@ -22,6 +22,10 @@ public class BoardAlt {
         System.out.println();
     }
 
+    public char[][] getBoardArray() {
+        return boardArray;
+    }
+
     public boolean placeSymbol(char symbol, int row, int col) {
         if (boardArray[row][col] == ' ') {
             boardArray[row][col] = symbol;
