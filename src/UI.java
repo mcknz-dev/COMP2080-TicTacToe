@@ -1,4 +1,6 @@
+//Created By:
 //Mackenzie Hodgson
+//101597352
 
 import java.util.Scanner;
 
@@ -6,7 +8,9 @@ public class UI {
 
     static Scanner scanner = new Scanner(System.in);
 
-    //Shows the board to the player ------------------------------------------------------------------------------------
+
+    //Moved to Board.Java *****
+    /*//Shows the board to the player ------------------------------------------------------------------------------------
     public static void showBoard(char[][] board) {
         System.out.println();
         System.out.println("     1   2   3");
@@ -27,6 +31,7 @@ public class UI {
         }
         System.out.println();
     }
+     */
 
     //Welcome Screen / Game mode selection -----------------------------------------------------------------------------
     public static int promptGameMode() {
@@ -36,6 +41,7 @@ public class UI {
         System.out.println("Please select a game mode:");
         System.out.println("  1 - Two Players");
         System.out.println("  2 - Vs AI");
+        System.out.println();
 
         int choice = 0;
 
