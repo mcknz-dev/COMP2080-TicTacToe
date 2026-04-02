@@ -8,31 +8,6 @@ public class UI {
 
     static Scanner scanner = new Scanner(System.in);
 
-
-    //Moved to Board.Java *****
-    /*//Shows the board to the player ------------------------------------------------------------------------------------
-    public static void showBoard(char[][] board) {
-        System.out.println();
-        System.out.println("     1   2   3");
-        for (int row = 0; row < 3; row++) {
-            System.out.print("  " + (row + 1) + " ");
-            for (int col = 0; col < 3; col++) {
-                System.out.print(board[row][col]);
-                if (col < 2) {
-                    System.out.print(" | ");
-                }
-            }
-            System.out.println();
-
-            if (row < 2) {
-                System.out.println("    ---|---|---");
-            }
-
-        }
-        System.out.println();
-    }
-     */
-
     //Welcome Screen / Game mode selection -----------------------------------------------------------------------------
     public static int promptGameMode() {
         System.out.println("================================");
