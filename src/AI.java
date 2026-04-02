@@ -7,12 +7,12 @@ public class AI {
         // --------------------------------------------------------------------------
         // AI Game Mode - called by Main.java
         // Handles the full game loop when playing against the computer.
-        // Human chooses symbol, AI takes the opposite.
+        // Human player chooses symbol, AI takes the opposite.
         // --------------------------------------------------------------------------
 
         public static void playVsAI() {
 
-            // Get the player name and symbol:
+            // Get the human player's name and symbol:
             String playerName = UI.promptName(1);
             char human = UI.promptSymbol(playerName);
             char ai = (human == 'X') ? 'O' : 'X';
@@ -27,7 +27,7 @@ public class AI {
             while (true) {
 
                 // ------------------------------------------------------------------
-                // HUMAN TURN
+                // HUMAN PLAYER TURN
                 // ------------------------------------------------------------------
                 if (isPlayerTurn) {
 
@@ -165,7 +165,7 @@ public class AI {
                 }
                 return best;
 
-            // Human turn (minimize score):
+            // Human player's turn (minimize score):
             } else {
                 int best = Integer.MAX_VALUE;
 

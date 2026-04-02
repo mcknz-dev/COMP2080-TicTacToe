@@ -1,7 +1,7 @@
 // Mackenzie Hodgson - 101597352
 // Jocelyn Brown - 101597391
-// John - 101577733
-// Derek - 101590623
+// John Kenny - 101577733
+// Derek Page - 101590623
 
 public class Main {
 
